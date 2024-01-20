@@ -1,0 +1,64 @@
+@extends('layouts.app')
+@section('title','ট্রেড লাইসেন্স তালিকা')
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-outline card-default">
+                <div class="card-header">
+                    <a href="{{ route('trade_license_add') }}" class="btn btn-success bg-gradient-success">ট্রেড লাইসেন্স আবেদন ফরম</a>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="table-responsive-sm">
+                        <table id="table" class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>লাইসেন্স নং</th>
+                                <th>প্রতিষ্ঠানের নাম</th>
+                                <th>মালিকের নাম</th>
+                                <th>পিতা/স্বামীর নাম</th>
+                                <th>ওয়ার্ড নং</th>
+                                <th>মহল্লা/রাস্তা নাম</th>
+                                <th>মোবাইল নম্বর</th>
+                                <th>অ্যাকশন</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('script')
+    <script>
+        $(function () {
+            $('#table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route('trade_license_approve_list_datatable') }}',
+
+                "pagingType": "full_numbers",
+                "dom": 'T<"clear">lfrtip',
+                "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, "All"]
+                ],
+                columns: [
+                    {data: 'licence_no', name: 'licence_no'},
+                    {data: 'organization_name', name: 'organization_name'},
+                    {data: 'name', name: 'name'},
+                    {data: 'father_husband_name', name: 'father_husband_name'},
+                    {data: 'ward_no', name: 'ward_no'},
+                    {data: 'road_name', name: 'road_name'},
+                    {data: 'mobile_no', name: 'mobile_no'},
+                    {data: 'action', name: 'action', orderable: false},
+                ],
+                "columnDefs": [
+                    {"className": "text-left", "targets": "5"}
+                ],
+                "responsive": false, "autoWidth": false,
+            });
+        })
+    </script>
+@endsection

@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('loans', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('employee_id');
+            $table->integer('loan_type_id');
+            $table->float('amount',100,2)->default(0);
+            $table->float('repay_loan_pf',100,2)->default(0);
+            $table->float('repay_loan_other',100,2)->default(0);
+            $table->float('monthly_installment_amount',100,2)->default(0);
+            $table->float('date',100,2)->default(0);
+            $table->integer('loan_status');
+            $table->integer('status');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('loans');
+    }
+};

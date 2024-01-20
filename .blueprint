@@ -1,0 +1,2 @@
+models:
+    User: { name: string, email: 'string nullable', username: string, email_verified_at: 'datetime nullable', password: string, plain_password: string, status: boolean, remember_token: 'string:100 nullable' }
